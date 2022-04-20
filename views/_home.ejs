@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <form action="/getdetails" method="post" id="calculator">
+
+        <!-- <input type="text" name="number" placeholder="enter parcel weight" required> -->
+        <input type="text" name="number" placeholder="enter parcel weight" required
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
+        <input type="text" name="pincode" placeholder="enter pincode " required
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+        <select name="select" id="" required>
+            <option value="Forward">Forward</option>
+            <option value="Forward & Rto">Forward & Rto</option>
+
+        </select>
+        <button type='submit' id="btn">Submit</button>
+    </form>
+    <div id="value">
+    <% if(price) { %>
+        <h2>the total  charge  with delivary  for this product of the address of <%= postoffice %>  is <%= price %>
+        </h2>
+        <% } %>
+    </div>
+            <script>
+
+        <%if (flash.success.length > 0) {%>
+                    new Noty({
+                        theme: 'sunset',
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1000,
+                        text: '<%= flash.success %>'
+                    }).show();
+        <%}%>
+        <%if (flash.error.length > 0) {%>
+                    new Noty({
+                        theme: 'sunset',
+                        type: 'error',
+                        layout: 'topRight',
+                        timeout: 1000,
+                        text: '<%= flash.error %>'
+                    }).show();
+        <%}%>
+            </script>
+
+</body>
+
+</html>
